@@ -1,0 +1,15 @@
+services:
+  samba:
+    build: .
+    container_name: smbshare
+    volumes:
+      - ./${DOCKER_HOST_FOLDER}:/shared  # Referencing DOCKER_HOST_FOLDER from the .env file
+    environment:
+      - USERNAME=${USERNAME}             # Referencing the USERNAME from the .env file
+      - PASSWORD=${PASSWORD}             # Referencing the PASSWORD from the .env file
+      - SHARE_NAME=${SHARE_NAME}         # Referencing the SHARE_NAME from the .env file
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    network_mode: host
+    
